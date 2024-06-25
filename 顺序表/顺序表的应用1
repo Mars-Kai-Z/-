@@ -13,8 +13,8 @@ void MergeList(SeqList A, SeqList B, SeqList* C)
 
 		if (e1 <= e2)
 		{
-			InsertList(C, k, e1);
-			i++; k++;
+			InsertList(C, k, e1);		// 将较小的一个元素插入顺序表C中
+			i++; k++;			// 往后移动一个位置，准备比较下一个元素
 		}
 		else
 		{
@@ -24,7 +24,7 @@ void MergeList(SeqList A, SeqList B, SeqList* C)
 		}
 	}
 
-	while (i<=A.length)
+	while (i<=A.length)				// 如果顺序表A中还有剩余，顺序表B中已经没有元素
 	{
 		GetElem(A, i, &e1);
 		InsertList(C, k, e1);
@@ -32,12 +32,12 @@ void MergeList(SeqList A, SeqList B, SeqList* C)
 		k++;
 	}
 
-	while (j <= B.length)
+	while (j <= B.length)				// 如果顺序表B中还有剩余，顺序表A中已经没有元素
 	{
 		GetElem(B, j, &e2);
 		InsertList(C, k, e2);
 		j++;
 		k++;
 	}
-	C->length = A.length + B.length;
+	C->length = A.length + B.length;		// 顺序表C的长度等于顺序表A和顺序表B的长度之和
 }
