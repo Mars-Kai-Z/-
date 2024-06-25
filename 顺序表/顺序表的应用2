@@ -1,1 +1,81 @@
+/*将两个无需的线性表合并成一个有序的线性表*/
 
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#include"SeqList.h"
+int UnionAB(SeqList* A, SeqList *B);
+
+int main(void)
+{
+	int i, flag;
+	DataType e;									// 输出顺序表中的元素时的返回元素
+	DataType a[] = { 81,32,61,12,39,25 };
+	DataType b[] = { 12,44,39,16,28,6,61,76, 25,77};
+
+	SeqList LA, LB;							// 创建顺序表LA，LB；并将其初始化
+	InitList(&LA);
+	InitList(&LB);
+
+	for (i = 0; i < sizeof(a) / sizeof(a[0]); i++) {	// 将数组a中的元素插入顺序表LA中
+		if (InsertList(&LA, i + 1, a[i]) == 0) {
+			printf("插入位置不合法！");
+			return -1;
+		}
+	}
+
+	printf("顺序表LA中的元素：\n");
+	for (i = 0; i <= LA.length; i++) {					// 输出顺序表LA中的元素
+		flag = GetElem(LA, i, &e);
+		if (flag == 1) {
+			printf("%4d", e);
+		}
+	}
+	printf("\n");
+
+	for (i = 0; i < sizeof(b) / sizeof(b[0]); i++) {	// 将数组b中的元素插入顺序表LB中
+		if (InsertList(&LB, i + 1, b[i]) == 0) {
+			printf("插入位置不合法！");
+			return -1;
+		}
+	}
+
+	printf("顺序表LB中的元素：\n");
+	for (i = 0; i <= LB.length; i++) {					// 输出顺序表LB中的元素
+		flag = GetElem(LB, i, &e);
+		if (flag == 1) {
+			printf("%4d", e);
+		}
+	}
+	printf("\n");
+
+	UnionAB(&LA, &LB);
+
+	printf("顺序表LA中的元素：\n");
+	for (i = 0; i <= LA.length; i++) {					// 输出顺序表LA中的元素
+		flag = GetElem(LA, i, &e);
+		if (flag == 1) {
+			printf("%4d", e);
+		}
+	}
+	printf("\n");
+
+
+
+	return 0;
+}
+
+int UnionAB(SeqList *LA, SeqList *LB) {
+	int i;
+	int j;
+	for (i = 0; i < LB->length; i++) {
+		for (j = 0; j < LA->length; j++) {						// 循环比较顺序表LA和LB中的元素
+			if (LB->list[i] == LA->list[j]) {					// 找出LB中和LA不相等的元素
+				break;
+			}
+		}
+		if (j == LA->length) {
+			InsertList(LA, LA->length + 1, LB->list[i]);		// 插入该元素
+		}
+	}
+	return 0;
+}
