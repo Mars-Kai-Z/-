@@ -1,12 +1,15 @@
-【存储结构】
-typedef int DataType;		/*元素类型定义为整型*/
+/*运行程序时，请将该文件设为SeqList.h*/
+#include<stdio.h>
+#define ListSize 100
 
+//【存储结构】
+typedef int DataType;		/*元素类型定义为整型*/
 typedef struct SeqList {
 	DataType list[ListSize];	// 数据元素的类型
 	int length;					      // 长度
 }SeqList;
 
-【基本运算】
+//【基本运算】
 void InitList(SeqList* L)
 /*初始化线性表*/
 {
